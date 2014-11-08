@@ -28,18 +28,64 @@
 		</div>
 		<section></section>
 		<div class="head"></div>
+
+
 	</div>
+	<form id="form">
+		<input id="say-hello" type="text" placeholder="say hi">
+		<button id="send-me"></button>
+	</form>
+	<ul>
+			<% @chat.each do |chat| %>
+
+				<li><%= chat.chat %></li>
+
+			<% end %>
+
+		</ul>
 	<!-- <div id="your_div_id"></div> -->
 	<script>
 
-	$(document).on('click', function(e){
-	    $('.con').css({
-	       left:  e.pageX,
-	       top:   e.pageY
-	    });
-	    console.log(e)
-	});
+	// $(document).on('click', function(e){
+	//     $('.yes').css({
+	//        left:  e.pageX,
+	//        top:   e.pageY
+	//     });
+	//     console.log(e)
 
+
+	// });
+		
+	$(document).ready(function(){
+
+		var address = "http://1c86ddfa.ngrok.com"
+
+		 setTimeout(function(){
+    		location.reload();
+    		console.log("reloaded")
+  		 },5000)
+
+		$('#form').on('click', '#send-me', function (event) {
+			event.preventDefault();
+			var $words = $('#say-hello');
+			var $value = $words.val();
+			$words.val("");
+			$('ul').append("<li>me  " + $value + "</li>")
+			console.log($value);
+
+			$.ajax({
+				type: "POST",
+				url: address + "/chats/sen",
+				data: { 'body':$value },
+				success: function () {
+					console.log("sent")
+				}
+			});
+		})
+
+
+
+	});
 	</script>
 
 </body>
