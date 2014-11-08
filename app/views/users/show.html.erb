@@ -1,0 +1,46 @@
+<DOCTYPE html>
+
+<html>
+<head>
+
+
+	<style>
+
+
+	</style>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+</head>
+<body>
+	<div class="con">
+		<div class="smile">	
+			<div class="right-eye">
+
+
+			</div>	
+			<div class="left-ear"></div>
+			<div class="right-ear"></div>
+			<div class="toung-two"></div>
+			<div class="toung"></div>
+			<div class="hello">Happy Birthday Mom</div>
+			
+		</div>
+		<section></section>
+		<div class="head"></div>
+	</div>
+	<!-- <div id="your_div_id"></div> -->
+	<script>
+
+	$(document).on('click', function(e){
+	    $('.con').css({
+	       left:  e.pageX,
+	       top:   e.pageY
+	    });
+	    console.log(e)
+	});
+
+	</script>
+
+</body>
+</html>
