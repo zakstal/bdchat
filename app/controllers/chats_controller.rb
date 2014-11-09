@@ -3,17 +3,22 @@ class ChatsController < ApplicationController
 	
 
 	def rec
-		puts "here!!!!!!!!!!!!!!!"
-		puts params
-		Chat.create!(from_user_id: 1, to_user_id: 2, chat: params["Body"])
-		
-
+		puts "helloooisdofisodifjsodifjsodifjsodifjsodifjsodifjsodifjso"
+		Chat.all.each do |post|
+			post.destroy
+		end
+		render json: "chats deleted"
 	end
 
 	def sen
-		puts "here TOO@@@@@@@@@@"
-		puts params
-		Chat.create!(from_user_id: 1, to_user_id: 2, chat: params["body"])
+
+		if params["Body"] == "H"
+			word = "Hi mom Happy Birthday!"
+		else
+			word = params["Body"]
+		end
+
+		Chat.create!(from_user_id: 1, to_user_id: 2, chat: word)
 		render json: params['body']
 	end
 

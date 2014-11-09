@@ -22,8 +22,8 @@
 			<div class="left-ear"></div>
 			<div class="right-ear"></div>
 			<div class="toung-two"></div>
-			<div class="toung"></div>
-			<div class="hello">Happy Birthday Mom</div>
+			<div class="toung "></div>
+			<div class="talk hello">Happy Birthday Mom!</div>
 			
 		</div>
 		<section></section>
@@ -35,8 +35,8 @@
 		<input class="hidden" id="say-hello" type="text" value="say hi" autofocus="autofocus">
 		<button class="hidden" id="send-me"></button>
 	</form>
-		<ul class="hidden" id="list">
-		</ul>
+		<div class="hidden" id="list">
+		</div>
 	<script>
 
 	// $(document).on('click', function(e){
@@ -51,12 +51,39 @@
 		
 	$(document).ready(function(){
 
-		setTimeout(function () {
-			$('#say-hello').removeClass('hidden')
-			$('#send-me').removeClass('hidden')
-			$('#list').removeClass('hidden')
+		$.ajax({
+			type: "POST",
+			url: "/remove_old_chat",
+			success: function (resp) {
+				console.log("chat deleted", resp)
+			}
+		});
 
-		}, 5000);
+		setTimeout(function () {
+			// alert zak when some (mom) has logged on
+			$.ajax({
+					type: "POST",
+					url: address + "/notifications/notify",
+					data: { 'body': "Moms logged on" },
+					success: function (resp) {
+						console.log("sent", resp)
+					}
+				});
+		}, 200);
+
+		
+
+		$('.con').hover(function (event) {
+				if ($('.talk').hasClass('hello')){
+					$('.talk').removeClass('hello')
+					$('.talk').addClass('smile-five-hello')
+				}
+			setTimeout(function() {
+				$('#say-hello').removeClass('hidden')
+				$('#send-me').removeClass('hidden')
+				$('#list').removeClass('hidden')
+			}, 2000);	
+		});
 
 		var address = "http://1c86ddfa.ngrok.com"
 
@@ -72,11 +99,11 @@
 				url: address + "/users",
 				success: function (resp) {
 					console.log("reset")
-					var $list = $('ul');
+					var $list = $('#list');
 					$list.html('');
 
 					resp.forEach(function(words) {
-						$list.prepend("<li>" + words.chat + "</li>");
+						$list.prepend('<div class="list-item">' + words.chat + '</div>');
 					});
 				}
 			});
@@ -87,7 +114,7 @@
 			var $words = $('#say-hello');
 			var $value = $words.val();
 			$words.val("");
-			$('ul').prepend("<li>" + $value + "</li>")
+			$('#list').prepend('<div class="list-item">' + $value + '</div>')
 			console.log($value);
 
 

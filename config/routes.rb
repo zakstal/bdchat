@@ -4,4 +4,5 @@ Bdchat::Application.routes.draw do
   post "/chats/rec", to: "chats#rec"
   post "/chats/sen", to: "chats#sen"
   post 'notifications/notify' => 'notifications#notify'
+  post '/remove_old_chat', to: "chats#rec"
 end
