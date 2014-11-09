@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+
 input, button {
 	display: inline-block;
 	border: none;
@@ -9,6 +11,8 @@ input, button {
 	background: transparent;
 	
 }
+
+
 
 form {
 	position: relative;
@@ -19,31 +23,40 @@ form {
 }
 
 .hidden {
-	dispaly: none;
+	background: #fff;
+	color: #fff;
+	border-bottom: 1px solid #fff;
 }
 
 input {
+	float: left;
 	height: 80px;
 	width: 250px;
 	background: #fcc;
-	font-size: 50px;
+	font-size: 30px;
 	padding: 10px;
-	padding-left: 20px;
+	padding-bottom: 12px;
+	padding-left: 40px;
 	border-radius: 20px;
 	margin-bottom: 20px;
+	color: #555;
+	transition: all 1s;
 
 }
 
 button {
+	float: left;
+	display: inline-block;
 	position: ablsolute;
 	background: #fcc;
 	height: 100px;
 	width: 60px;
+	margin-left: 3px;
 	padding-bottom: 30px;
 	border-radius: 20px;
-
 	bottom: 0;
-	
+	transition: all 1s;
+	cursor: pointer;
 }
 
 .head {
@@ -124,7 +137,7 @@ section {
 }
 
 .con:hover > div.smile > div.hello {
-	right: -250px;
+	right: -230px;
 	
 }
 
@@ -232,8 +245,27 @@ section {
 }
 
 ul {
-	margin-left: 760px;
-	padding-top: 5px;
+	
+	margin-left: 720px;
+	padding-top: 0px;
 	list-style: none;
+	height: 280px;
+	overflow: auto;
+	border-bottom: 1px solid #aaa;
+	width: 400px;
+	transition: all .5s;
 }
 
+li {
+	padding: 10px;
+	paddin-right: 20px;
+	width: 340px;
+}
+
+ul > li:hover {
+	backgournd: #eee;
+}
+
+li:nth-child(odd) {
+	background: #eff;
+}

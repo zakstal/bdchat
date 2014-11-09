@@ -15,6 +15,8 @@ gem 'turbolinks'
 
 gem 'jbuilder', '~> 1.2'
 
+gem 'rails', '4.1.6'
+
 group :doc do
 
 

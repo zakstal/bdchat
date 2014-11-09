@@ -3,4 +3,5 @@ Bdchat::Application.routes.draw do
   resources :chats, only: [:rec]
   post "/chats/rec", to: "chats#rec"
   post "/chats/sen", to: "chats#sen"
+  post 'notifications/notify' => 'notifications#notify'
 end

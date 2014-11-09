@@ -32,18 +32,11 @@
 
 	</div>
 	<form id="form">
-		<input id="say-hello" type="text" placeholder="say hi">
-		<button id="send-me"></button>
+		<input class="hidden" id="say-hello" type="text" value="say hi" autofocus="autofocus">
+		<button class="hidden" id="send-me"></button>
 	</form>
-	<ul>
-			<% @chat.each do |chat| %>
-
-				<li><%= chat.chat %></li>
-
-			<% end %>
-
+		<ul class="hidden" id="list">
 		</ul>
-	<!-- <div id="your_div_id"></div> -->
 	<script>
 
 	// $(document).on('click', function(e){
@@ -58,11 +51,35 @@
 		
 	$(document).ready(function(){
 
+		setTimeout(function () {
+			$('#say-hello').removeClass('hidden')
+			$('#send-me').removeClass('hidden')
+			$('#list').removeClass('hidden')
+
+		}, 5000);
+
 		var address = "http://1c86ddfa.ngrok.com"
 
-		 setTimeout(function(){
-    		location.reload();
+		$('#say-hello').on('keydown', function(event) {
+			$(event.currentTarget).val("");
+			$('#say-hello').off();
+		});
+
+		 setInterval(function(){
     		console.log("reloaded")
+    		$.ajax({
+				type: "GET",
+				url: address + "/users",
+				success: function (resp) {
+					console.log("reset")
+					var $list = $('ul');
+					$list.html('');
+
+					resp.forEach(function(words) {
+						$list.prepend("<li>" + words.chat + "</li>");
+					});
+				}
+			});
   		 },5000)
 
 		$('#form').on('click', '#send-me', function (event) {
@@ -70,22 +87,24 @@
 			var $words = $('#say-hello');
 			var $value = $words.val();
 			$words.val("");
-			$('ul').append("<li>me  " + $value + "</li>")
+			$('ul').prepend("<li>" + $value + "</li>")
 			console.log($value);
+
 
 			$.ajax({
 				type: "POST",
-				url: address + "/chats/sen",
+				url: address + "/notifications/notify",
 				data: { 'body':$value },
-				success: function () {
-					console.log("sent")
+				success: function (resp) {
+					console.log("sent", resp)
+
+					
 				}
 			});
 		})
 
-
-
 	});
+
 	</script>
 
 </body>
